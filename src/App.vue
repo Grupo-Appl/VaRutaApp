@@ -34,14 +34,14 @@ export default {
     return {
       drawer: false,
       items: [
-        { label: 'Inicio', to: '/home' },
-        { label: 'Remitentes', to: '/remitentes' },
-        { label: 'Consignatarios', to: '/consignatarios' },
-        { label: 'Destinos', to: '/destinos' },
-        { label: 'Tipo documento', to: '/documentos' },
-        { label: 'Envio', to: '/envios' },
-        { label: 'Entrega de envio', to: '/entregas' },
-        { label: 'Consulta de envio', to: '/consultas' },
+        { label: 'Home', to: '/home' },
+        { label: 'Senders', to: '/senders' },
+        { label: 'Consignees', to: '/consignees' },
+        { label: 'Destinations', to: '/destinations' },
+        { label: 'Type of document', to: '/documents' },
+        { label: 'Shipping', to: '/envios' },
+        { label: 'Order Delivery', to: '/entregas' },
+        { label: 'Shipping Status', to: '/consultas' },
       ]
     }
   }
