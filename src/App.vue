@@ -35,9 +35,9 @@ export default {
       drawer: false,
       items: [
         { label: 'Inicio', to: '/home' },
-        { label: 'Remitentes', to: '/remitentes' },
-        { label: 'Consignatarios', to: '/consignatarios' },
-        { label: 'Destinos', to: '/destinos' },
+        { label: 'Senders', to: '/senders' },
+        { label: 'Consignees', to: '/consignees' },
+        { label: 'Destinations', to: '/destinations' },
         { label: 'Tipo documento', to: '/documentos' },
         { label: 'Envio', to: '/envios' },
         { label: 'Entrega de envio', to: '/entregas' },
