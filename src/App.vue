@@ -38,7 +38,7 @@ export default {
         { label: 'Remitentes', to: '/remitentes' },
         { label: 'Consignatarios', to: '/consignatarios' },
         { label: 'Destinos', to: '/destinos' },
-        { label: 'Document', to: '/documentos' },
+        { label: 'Document', to: '/documents' },
         { label: 'Envio', to: '/envios' },
         { label: 'Entrega de envio', to: '/entregas' },
         { label: 'Consulta de envio', to: '/consultas' },

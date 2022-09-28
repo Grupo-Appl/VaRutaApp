@@ -5,7 +5,7 @@ import HomeComponent from '../public/pages/Home.component.vue'
 const Destino =() => import('../varuta/pages/destiny-list.component.vue')
 const Remitente =() => import('../varuta/pages/senders-list.component.vue')
 const Consignatarios =() => import('../varuta/pages/consignees-list.component.vue')
-const Documentos =() => import('../varuta/pages/document-list.component.vue')
+const Documents =() => import('../varuta/pages/document-list.component.vue')
 const Envios =() => import('../varuta/pages/shipping-list.component.vue')
 
 const router = createRouter({
@@ -32,9 +32,9 @@ const router = createRouter({
       component: Consignatarios
     },
     {
-      path: '/documentos',
-      name: 'documentos',
-      component: Documentos
+      path: '/documents',
+      name: 'documents',
+      component: Documents
     },
     {
       path: '/envios',
