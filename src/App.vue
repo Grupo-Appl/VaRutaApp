@@ -34,6 +34,7 @@ export default {
     return {
       drawer: false,
       items: [
+
         { label: 'Home', to: '/home' },
         { label: 'Senders', to: '/senders' },
         { label: 'Consignees', to: '/consignees' },
@@ -42,6 +43,7 @@ export default {
         { label: 'Shipping', to: '/envios' },
         { label: 'Order Delivery', to: '/entregas' },
         { label: 'Shipping Status', to: '/consultas' },
+
       ]
     }
   }
