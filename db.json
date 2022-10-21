@@ -1,19 +1,114 @@
 {
-  "posts": [
+  "senders": [
     {
-      "id": 1,
-      "title": "json-server",
-      "author": "typicode"
+      "id": 2,
+      "name": "Maria",
+      "dni": "10203040",
+      "phone": "998899988"
+    },
+    {
+      "id": 3,
+      "name": "Tristan",
+      "dni": "10203040",
+      "phone": "998899988"
+    },
+    {
+      "id": 4,
+      "name": "clau",
+      "dni": "78945612",
+      "phone": "987654321"
     }
   ],
-  "comments": [
+  "consignees": [
     {
       "id": 1,
-      "body": "some comment",
-      "postId": 1
+      "name": "Belen",
+      "dni": "10203040",
+      "phone": "998899988",
+      "address": "Av. Universitaria"
+    },
+    {
+      "id": 2,
+      "name": "Lucia",
+      "dni": "10203040",
+      "phone": "998899988",
+      "address": "Av. Antunez de Mayolo"
+    },
+    {
+      "id": 3,
+      "name": "Andrea",
+      "dni": "10203040",
+      "phone": "998899988",
+      "address": "Jiron Huanuco"
     }
   ],
-  "profile": {
-    "name": "typicode"
-  }
+  "Destinations": [
+    {
+      "id": 2,
+      "name": "Cajamarca"
+    },
+    {
+      "id": 3,
+      "name": "Lima"
+    },
+    {
+      "id": 4,
+      "name": "Cusco"
+    },
+    {
+      "id": 5,
+      "name": "Apurimac"
+    },
+    {
+      "id": 6,
+      "name": "Piura"
+    }
+  ],
+  "documents": [
+    {
+      "id": 1,
+      "name": "Boleta"
+    },
+    {
+      "id": 2,
+      "name": "Factura"
+    },
+    {
+      "id": 3,
+      "name": "Guia"
+    },
+    {
+      "id": 4,
+      "name": "Ticket"
+    }
+  ],
+  "Shipments": [
+    {
+      "id": 1,
+      "date": "12/04/2022",
+      "destiny": "Trujillo",
+      "weight": "4.8",
+      "quantity": 1,
+      "freight": 15,
+      "description": "Descripcion del envio"
+    },
+    {
+      "id": 2,
+      "date": "12/04/2022",
+      "destiny": "Chiclayo",
+      "weight": "4.8",
+      "quantity": 1,
+      "freight": 15,
+      "description": "Descripcion del envio 2"
+    },
+    {
+      "id": 3,
+      "date": "12/04/2022",
+      "destiny": "piura",
+      "description": "descripcion",
+      "freight": "750",
+      "quantity": "2",
+      "weight": "3.8"
+    }
+  ]
 }
