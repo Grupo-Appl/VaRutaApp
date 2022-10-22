@@ -8,6 +8,7 @@ const Consignees =() => import('../profiles/components/consignees-information-se
 const Documents =() => import('../handling/components/document-information-section.component.vue')
 const Shipping =() => import('../booking/components/shipping-information-section.component.vue')
 
+
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -37,8 +38,8 @@ const router = createRouter({
       component: Documents
     },
     {
-      path: '/envios',
-      name: 'envios',
+      path: '/shipping',
+      name: 'shipping',
       component: Shipping
     }
   ]

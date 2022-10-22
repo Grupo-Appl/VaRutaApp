@@ -40,9 +40,9 @@ export default {
         { label: 'Consignees', to: '/consignees' },
         { label: 'Destinations', to: '/destinations' },
         { label: 'Type of document', to: '/documents' },
-        { label: 'Shipping', to: '/envios' },
-        { label: 'Order Delivery', to: '/entregas' },
-        { label: 'Shipping Status', to: '/consultas' },
+        { label: 'Shipping', to: '/shipping' },
+        { label: 'Order Delivery', to: '/deliver' },
+        { label: 'Shipping Status', to: '/see' },
 
       ]
     }
