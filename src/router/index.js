@@ -1,7 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeComponent from '../shared/public/pages/Home.component.vue'
 
-//const AboutView = () => import('../public/pages/aboutView.vue');
 const Destiny =() => import('../handling/components/destiny-information-section.component.vue')
 const Senders =() => import('../profiles/components/senders-information-section.component.vue')
 const Consignees =() => import('../profiles/components/consignees-information-section.component.vue')
