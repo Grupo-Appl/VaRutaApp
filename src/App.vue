@@ -40,7 +40,7 @@ export default {
         { label: 'Consignees', to: '/consignees' },
         { label: 'Destinations', to: '/destinations' },
         { label: 'Type of document', to: '/documents' },
-        { label: 'Shipping', to: '/shipping' },
+        { label: 'Shippings', to: '/shipping' },
         { label: 'Order Delivery', to: '/deliver' },
         { label: 'Shipping Status', to: '/see' },
 

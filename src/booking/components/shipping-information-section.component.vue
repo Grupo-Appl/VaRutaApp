@@ -140,7 +140,7 @@
                            :class="{'p-invalid': submitted && !shipping.quantity}"/>
             <label for="quantity">Quantity</label>
             <small class="p-error" v-if="submitted && !shipping.quantity">
-              Quantity is required
+              Cantidad is required
             </small>
           </span>
 
