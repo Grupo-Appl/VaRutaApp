@@ -7,6 +7,7 @@ const Senders =() => import('../profiles/components/senders-information-section.
 const Consignees =() => import('../profiles/components/consignees-information-section.component.vue')
 const Documents =() => import('../handling/components/document-information-section.component.vue')
 const Shipping =() => import('../booking/components/shipping-information-section.component.vue')
+const Packages =() => import('../handling/components/package-information-section.component.vue')
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -37,9 +38,15 @@ const router = createRouter({
       component: Documents
     },
     {
-      path: '/envios',
-      name: 'envios',
+      path: '/shipping',
+      name: 'shipping',
       component: Shipping
+    },
+
+    {
+      path: '/packages',
+      name: 'packages',
+      component: Packages
     }
   ]
 })

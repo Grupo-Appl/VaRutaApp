@@ -110,5 +110,16 @@
       "quantity": "2",
       "weight": "3.8"
     }
+  ],
+  "Packages": [
+    {
+      "id": 1,
+      "name": "caja"
+    },
+    {
+      "id": 2,
+      "name": "caja de ropa",
+      "apiId": "v1"
+    }
   ]
 }

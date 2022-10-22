@@ -39,6 +39,7 @@ export default {
         { label: 'Senders', to: '/senders' },
         { label: 'Consignees', to: '/consignees' },
         { label: 'Destinations', to: '/destinations' },
+        { label: 'Type of Package', to: '/packages' },
         { label: 'Type of document', to: '/documents' },
         { label: 'Shipping', to: '/envios' },
         { label: 'Order Delivery', to: '/entregas' },
