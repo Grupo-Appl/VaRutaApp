@@ -177,7 +177,7 @@
 
 <script>
 import {FilterMatchMode} from "primevue/api";
-import {ShipmentsApiService} from "@/varuta/services/shipments-api.service";
+import {ShipmentsApiService} from "@/booking/services/shipments-api.service";
 
 export default {
   description: "shipping-list.component",

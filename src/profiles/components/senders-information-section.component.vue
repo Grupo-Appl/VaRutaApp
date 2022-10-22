@@ -6,7 +6,7 @@
         <template #start>
           <pv-button label="New" icon="pi pi-plus" class="p-button-success mr-2" @click="openNew"></pv-button>
           <pv-button label="Delete" icon="pi pi-trash" class="p-button-danger" @click="confirmDeleteSelected"
-                     :disabled="!selectedConsignees || !selectedConsignees.length"></pv-button>
+                     :disabled="!selectedSenders || !selectedSenders.length"></pv-button>
         </template>
         <template #end>
           <pv-button label="Export" icon="pi pi-download" class="p-button-help"
@@ -15,21 +15,21 @@
       </pv-toolbar>
 
       <!-- Data Table Section -->
-      <pv-data-table ref="dt" :value="consignees"
-                     v-model:selection="selectedConsignees"
+      <pv-data-table ref="dt" :value="senders"
+                     v-model:selection="selectedSenders"
                      dataKey="id"
                      :paginator="true"
                      :rows="10"
                      :filters="filters"
                      paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown"
                      :rowsPerPageOptions="[5, 10, 25]"
-                     currentPageReportTemplate="Showing {first} to {last} of {totalRecords} consignees"
+                     currentPageReportTemplate="Showing {first} to {last} of {totalRecords} senders"
                      responsiveLayout="scroll">
 
         <template #header>
 
           <div class="table-header flex flex-column md:flex-row md:justify-content-between">
-            <h5 class="mb-2 md:m-0 p-as-md-center text-xl">Manage Consignees</h5>
+            <h5 class="mb-2 md:m-0 p-as-md-center text-xl">Manage Senders</h5>
             <span class="p-input-icon-left">
               <i class="pi pi-search"></i>
               <pv-input-text v-model="filters['global'].value" placeholder="Search..."></pv-input-text>
@@ -41,35 +41,36 @@
         <pv-column field="id" header="Id" :sortable="true" style="min-width: 12rem"></pv-column>
         <pv-column field="name" header="Name" :sortable="true" style="min-width: 16rem"></pv-column>
         <pv-column field="dni" header="Dni" :sortable="true" style="min-width: 16rem"></pv-column>
-        <pv-column field="address" header="Address" :sortable="true" style="min-width: 16rem"></pv-column>
+        <pv-column field="phone" header="Phone" :sortable="true" style="min-width: 16rem"></pv-column>
 
         <pv-column :exportable="false" style="min-width: 8rem">
           <template #body="slotProps">
             <pv-button icon="pi pi-pencil" class="p-button-text p-button-rounded"
-                       @click="editConsignee(slotProps.data)"></pv-button>
+                       @click="editSender(slotProps.data)"></pv-button>
             <pv-button icon="pi pi-trash" class="p-button-text p-button-rounded"
-                       @click="confirmDeleteConsignee(slotProps.data)"></pv-button>
+                       @click="confirmDeleteSender(slotProps.data)"></pv-button>
           </template>
         </pv-column>
 
       </pv-data-table>
 
-      <!-- Add/Edit Consignee Dialog -->
+      <!-- Add/Edit Sender Dialog -->
       <pv-dialog
-          v-model:visible="consigneeDialog"
+          v-model:visible="senderDialog"
           :style="{ width: '450px'}"
-          header="Consignee Information"
+          header="Sender Information"
           :modal="true"
           class="p-fluid">
+
         <div class="field mt-3">
           <span class="p-float-label">
             <pv-input-text type="text"
-                           v-model.trim="consignee.name"
+                           v-model.trim="sender.name"
                            required="true"
                            autofocus
-                           :class="{'p-invalid': submitted && !consignee.name}"/>
+                           :class="{'p-invalid': submitted && !sender.name}"/>
             <label for="name">Name</label>
-            <small class="p-error" v-if="submitted && !consignee.name">
+            <small class="p-error" v-if="submitted && !sender.name">
               Name is required
             </small>
           </span>
@@ -78,81 +79,82 @@
         <div class="field mt-3">
           <span class="p-float-label">
             <pv-input-text type="text"
-                           v-model.trim="consignee.dni"
+                           v-model.trim="sender.dni"
                            required="true"
                            autofocus
-                           :class="{'p-invalid': submitted && !consignee.dni}"/>
-            <label for="dni">Dni</label>
-            <small class="p-error" v-if="submitted && !consignee.dni">
-              D.N.I is required
+                           :class="{'p-invalid': submitted && !sender.dni}"/>
+            <label for="dni">DNI</label>
+            <small class="p-error" v-if="submitted && !sender.dni">
+              DNI is required
             </small>
           </span>
         </div>
+
         <br>
         <div class="field mt-3">
           <span class="p-float-label">
             <pv-input-text type="text"
-                           v-model.trim="consignee.address"
+                           v-model.trim="sender.phone"
                            required="true"
                            autofocus
-                           :class="{'p-invalid': submitted && !consignee.address}"/>
-            <label for="address">Address</label>
-            <small class="p-error" v-if="submitted && !consignee.address">
-              Address is required
+                           :class="{'p-invalid': submitted && !sender.phone}"/>
+            <label for="phone">Phone</label>
+            <small class="p-error" v-if="submitted && !sender.phone">
+              Phone is required
             </small>
           </span>
         </div>
 
         <template #footer>
           <pv-button :label="'Cancel'.toUpperCase()" icon="pi pi-times" class="p-button-text" @click="hideDialog"/>
-          <pv-button :label="'Save'.toUpperCase()" icon="pi pi-check" class="p-button-text" @click="saveConsignee"/>
+          <pv-button :label="'Save'.toUpperCase()" icon="pi pi-check" class="p-button-text" @click="saveSender"/>
         </template>
 
       </pv-dialog>
 
 
-      <!-- Delete Consignee Confirmation Dialog -->
-      <pv-dialog v-model:visible="deleteConsigneeDialog" :style="{width: '450px'}"
+      <!-- Delete Sender Confirmation Dialog -->
+      <pv-dialog v-model:visible="deleteSenderDialog" :style="{width: '450px'}"
                  header="Confirm" :modal="true">
         <div class="confirmation-content">
           <i class="pi pi-exclamation-triangle mr-3" style="font-size: 2rem"/>
-          <span v-if="consignee">
-            Are you sure you want to delete <b>{{ consignee.name }}</b>?
+          <span v-if="sender">
+            Are you sure you want to delete <b>{{ sender.name }}</b>?
           </span>
         </div>
         <template #footer>
           <pv-button :label="'No'.toUpperCase()"
                      icon="pi pi-times"
                      class="p-button-text"
-                     @click="deleteConsigneeDialog = false"/>
+                     @click="deleteSenderDialog = false"/>
           <pv-button :label="'Yes'.toUpperCase()"
                      icon="pi pi-check"
                      class="p-button-text"
-                     @click="deleteConsignee"/>
+                     @click="deleteSender"/>
         </template>
       </pv-dialog>
 
 
-      <!-- Delete Selected Consignees Confirmation Dialog -->
+      <!-- Delete Selected Senders Confirmation Dialog -->
       <pv-dialog
-          v-model:visible="deleteConsigneesDialog"
+          v-model:visible="deleteSendersDialog"
           :style="{ width: '450px'}"
           header="Confirm"
           :modal="true">
         <div class="confirmation-content">
           <i class="pi pi-exclamation-triangle mr-3"
              style="font-size: 2rem"/>
-          <span v-if="selectedConsignees">Are you sure you want to delete the selected consignees?</span>
+          <span v-if="selectedSenders">Are you sure you want to delete the selected senders?</span>
         </div>
         <template #footer>
           <pv-button :label="'No'.toUpperCase()"
                      icon="pi pi-times"
                      class="p-button-text"
-                     @click="deleteConsigneesDialog = false"/>
+                     @click="deleteSendersDialog = false"/>
           <pv-button :label="'Yes'.toUpperCase()"
                      icon="pi pi-check"
                      class="p-button-text"
-                     @click="deleteSelectedConsignees"/>
+                     @click="deleteSelectedSenders"/>
         </template>
       </pv-dialog>
 
@@ -162,113 +164,113 @@
 
 <script>
 import {FilterMatchMode} from "primevue/api";
-import {ConsigneesApiService} from "@/varuta/services/consignees-api.service";
+import {SendersApiService} from "@/profiles/services/senders-api.service";
 
 export default {
-  name: "consignee-list.component",
+  name: "sender-list.component",
   data() {
     return {
-      consignees: [],
-      consigneeDialog: false,
-      deleteConsigneeDialog: false,
-      deleteConsigneesDialog: false,
-      consignee: {},
-      selectedConsignees: null,
+      senders: [],
+      senderDialog: false,
+      deleteSenderDialog: false,
+      deleteSendersDialog: false,
+      sender: {},
+      selectedSenders: null,
       filters: {},
       submitted: false,
-      consigneesService: null
+      sendersService: null
     };
   },
   created() {
-    this.consigneesService = new ConsigneesApiService();
-    this.consigneesService.getAll().then((response) => {
-      this.consignees = response.data;
-      console.log(this.consignees);
-      this.consignees.forEach((consignee) => this.getDisplayableConsignee(consignee));
-      console.log(this.consignees);
+    this.sendersService = new SendersApiService();
+    this.sendersService.getAll().then((response) => {
+      this.senders = response.data;
+      console.log(this.senders);
+      this.senders.forEach((sender) => this.getDisplayableSender(sender));
+      console.log(this.senders);
     });
     this.initFilters();
   },
 
   methods: {
 
-    getDisplayableConsignee(consignee) {
-      return consignee;
+    getDisplayableSender(sender) {
+      return sender;
     },
 
-    getStorableConsignee(displayableConsignee) {
+    getStorableSender(displayableSender) {
       return {
-        id: displayableConsignee.id,
-        name: displayableConsignee.name,
-        dni: displayableConsignee.dni,
-        address: displayableConsignee.address
+        id: displayableSender.id,
+        name: displayableSender.name,
+        dni: displayableSender.dni,
+        phone: displayableSender.phone
       };
     },
 
     openNew() {
-      this.consignee = {};
+      this.sender = {};
       this.submitted = false;
-      this.consigneeDialog = true;
+      this.senderDialog = true;
     },
 
     hideDialog() {
-      this.consigneeDialog = false;
+      this.senderDialog = false;
       this.submitted = false;
     },
 
     findIndexById(id) {
       console.log(`current id: ${id}`);
-      return this.consignees.findIndex((consignee) => consignee.id === id);
+      return this.senders.findIndex((sender) => sender.id === id);
     },
 
-    saveConsignee() {
+    saveSender() {
       this.submitted = true;
-      if (this.consignee.name.trim()) {
-        if (this.consignee.id) {
-          console.log(this.consignee);
-          this.consignee = this.getStorableConsignee(this.consignee);
-          this.consigneesService.update(this.consignee.id, this.consignee)
+      if (this.sender.name.trim()) {
+        if (this.sender.id) {
+          console.log(this.sender);
+          this.sender = this.getStorableSender(this.sender);
+          this.sendersService.update(this.sender.id, this.sender)
               .then((response) => {
                 console.log(response.data.id);
-                this.consignees[this.findIndexById(response.data.id)] =
-                    this.getDisplayableConsignee(response.data);
-                this.$toast.add({severity: 'success', summary: 'Successful', detail: 'Consignee Updated', life: 3000});
+                this.senders[this.findIndexById(response.data.id)] =
+                    this.getDisplayableSender(response.data);
+                this.$toast.add({severity: 'success', summary: 'Successful', detail: 'Sender Updated', life: 3000});
                 console.log(response);
               });
         } else {
-          this.consignee.id = 0;
-          console.log(this.consignee);
-          this.consignee = this.getStorableConsignee(this.consignee);
-          this.consigneesService.create(this.consignee).then((response) => {
-            this.consignee = this.getDisplayableConsignee(response.data);
-            this.consignees.push(this.consignee);
-            this.$toast.add({severity: 'success', summary: 'Successful', detail: 'Consignee Created', life: 3000});
+          this.sender.id = 0;
+          console.log(this.sender);
+          this.sender = this.getStorableSender(this.sender);
+          this.sendersService.create(this.sender).then((response) => {
+            this.sender = this.getDisplayableSender(response.data);
+            this.senders.push(this.sender);
+            this.$toast.add({severity: 'success', summary: 'Successful', detail: 'Sender Created', life: 3000});
             console.log(response);
           });
         }
-        this.consigneeDialog = false;
-        this.consignee = {};
+        this.senderDialog = false;
+        this.sender = {};
       }
     },
 
-    editConsignee(consignee) {
-      console.log(consignee);
-      this.consignee = {...consignee};
-      console.log(this.consignee);
-      this.consigneeDialog = true;
+    editSender(sender) {
+      console.log(sender);
+      this.sender = {...sender};
+      console.log(this.sender);
+      this.senderDialog = true;
     },
 
-    confirmDeleteConsignee(consignee) {
-      this.consignee = consignee;
-      this.deleteConsigneeDialog = true;
+    confirmDeleteSender(sender) {
+      this.sender = sender;
+      this.deleteSenderDialog = true;
     },
 
-    deleteConsignee() {
-      this.consigneesService.delete(this.consignee.id).then((response) => {
-        this.consignees = this.consignees.filter((t) => t.id !== this.consignee.id);
-        this.deleteConsigneeDialog = false;
-        this.consignee = {};
-        this.$toast.add({severity: 'success', summary: 'Successful', detail: 'Consignee Deleted', life: 3000});
+    deleteSender() {
+      this.sendersService.delete(this.sender.id).then((response) => {
+        this.senders = this.senders.filter((t) => t.id !== this.sender.id);
+        this.deleteSenderDialog = false;
+        this.sender = {};
+        this.$toast.add({severity: 'success', summary: 'Successful', detail: 'Sender Deleted', life: 3000});
         console.log(response);
       });
     },
@@ -278,17 +280,17 @@ export default {
     },
 
     confirmDeleteSelected() {
-      this.deleteConsigneesDialog = true;
+      this.deleteSendersDialog = true;
     },
 
-    deleteSelectedConsignees() {
-      this.selectedConsignees.forEach((consignee) => {
-        this.consigneesService.delete(consignee.id).then((response) => {
-          this.consignees = this.consignees.filter((t) => t.id !== this.consignee.id);
+    deleteSelectedSenders() {
+      this.selectedSenders.forEach((sender) => {
+        this.sendersService.delete(sender.id).then((response) => {
+          this.senders = this.senders.filter((t) => t.id !== this.sender.id);
           console.log(response);
         });
       });
-      this.deleteConsigneesDialog = false;
+      this.deleteSendersDialog = false;
     },
 
     initFilters() {

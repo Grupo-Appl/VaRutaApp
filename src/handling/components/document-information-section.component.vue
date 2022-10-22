@@ -133,7 +133,7 @@
 
 <script>
 import {FilterMatchMode} from "primevue/api";
-import {DocumentsApiService} from "@/varuta/services/documents-api.service";
+import {DocumentsApiService} from "@/handling/services/documents-api.service";
 
 export default {
   name: "document-list.component",
