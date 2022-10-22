@@ -6,7 +6,7 @@ const Senders =() => import('../profiles/components/senders-information-section.
 const Consignees =() => import('../profiles/components/consignees-information-section.component.vue')
 const Documents =() => import('../handling/components/document-information-section.component.vue')
 const Shipping =() => import('../booking/components/shipping-information-section.component.vue')
-
+const Status =() => import('../tracking/components/status-information-section.component.vue')
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -40,6 +40,11 @@ const router = createRouter({
       path: '/shipping',
       name: 'shipping',
       component: Shipping
+    },
+    {
+      path: '/status',
+      name: 'status',
+      component: Status
     }
   ]
 })

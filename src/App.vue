@@ -42,7 +42,7 @@ export default {
         { label: 'Type of document', to: '/documents' },
         { label: 'Shippings', to: '/shipping' },
         { label: 'Order Delivery', to: '/deliver' },
-        { label: 'Shipping Status', to: '/see' },
+        { label: 'Shipping Status', to: '/status' },
 
       ]
     }
