@@ -39,7 +39,7 @@
 
         <pv-column selectionMode="multiple" style="width: 3rem" :exportable="false"></pv-column>
         <pv-column field="id" header="Id" :sortable="true" style="min-width: 12rem"></pv-column>
-        <pv-column field="name" header="Name" :sortable="true" style="min-width: 16rem"></pv-column>
+        <pv-column field="name" header="Type" :sortable="true" style="min-width: 16rem"></pv-column>
 
 
         <pv-column :exportable="false" style="min-width: 8rem">
@@ -67,7 +67,7 @@
                            required="true"
                            autofocus
                            :class="{'p-invalid': submitted && !package.name}"/>
-            <label for="name">Name</label>
+            <label for="name">Type</label>
             <small class="p-error" v-if="submitted && !package.name">
               Name is required
             </small>
