@@ -1,5 +1,6 @@
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
+import  VueAxios  from 'vue-axios'
 
 import App from './App.vue'
 import router from './router'
@@ -30,13 +31,16 @@ import Toast from "primevue/toast";
 import Dropdown from "primevue/dropdown";
 import Tag from "primevue/tag";
 import Card from "primevue/card";
-
+import Password from "primevue/password";
+import Axios from "axios";
+import Steps from 'primevue/steps';
 
 createApp(App)
     .use(createPinia())
     .use(router)
     .use(PrimeVue, { ripple: true })
     .use(ToastService)
+    .use(VueAxios, Axios)
     .component('pv-data-table', DataTable)
     .component('pv-data-table', DataTable)
     .component('pv-column', Column)
@@ -52,5 +56,6 @@ createApp(App)
     .component('pv-dropdown', Dropdown)
     .component('pv-tag', Tag)
     .component('pv-card', Card)
-
+    .component('pv-password', Password)
+    .component('pv-steps', Steps)
     .mount('#app')
