@@ -133,7 +133,7 @@
 
 <script>
 import {FilterMatchMode} from "primevue/api";
-import {DestinationsApiService} from "@/varuta/services/destinations-api.service";
+import {DestinationsApiService} from "@/handling/services/Destinations-api.service"
 
 export default {
   name: "destiny-list.component",

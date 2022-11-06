@@ -1,45 +1,61 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import HomeComponent from '../public/pages/Home.component.vue'
+import HomeComponent from '../shared/public/pages/Home.component.vue'
 
-//const AboutView = () => import('../public/pages/aboutView.vue');
-const Destino =() => import('../varuta/pages/destiny-list.component.vue')
-const Remitente =() => import('../varuta/pages/senders-list.component.vue')
-const Consignatarios =() => import('../varuta/pages/consignees-list.component.vue')
-const Documentos =() => import('../varuta/pages/document-list.component.vue')
-const Envios =() => import('../varuta/pages/shipping-list.component.vue')
+const Destiny =() => import('../handling/components/destiny-information-section.component.vue')
+const Senders =() => import('../profiles/components/senders-information-section.component.vue')
+const Consignees =() => import('../profiles/components/consignees-information-section.component.vue')
+const Documents =() => import('../handling/components/document-information-section.component.vue')
+const Shipping =() => import('../booking/components/shipping-information-section.component.vue')
+
+const LogIn =() => import('../security/component/user-consignee.component.vue')
+const Register=() => import('../security/component/user-consignee-register.component.vue')
+
+
+const Status =() => import('../tracking/components/status-information-section.component.vue')
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
-      path: '/home',
-      name: 'home',
-      component: HomeComponent
+      path: '/',
+      name: '',
+      component: LogIn
     },
     {
-      path: '/destinos',
-      name: 'destinos',
-      component: Destino
+      path: '/destinations',
+      name: 'destinations',
+      component: Destiny
     },
     {
-      path: '/remitentes',
-      name: 'remitentes',
-      component: Remitente
+      path: '/senders',
+      name: 'senders',
+      component: Senders
     },
     {
-      path: '/consignatarios',
-      name: 'consignatarios',
-      component: Consignatarios
+      path: '/consignees',
+      name: 'consignees',
+      component: Consignees
     },
     {
-      path: '/documentos',
-      name: 'documentos',
-      component: Documentos
+      path: '/documents',
+      name: 'documents',
+      component: Documents
     },
     {
-      path: '/envios',
-      name: 'envios',
-      component: Envios
+      path: '/shipping',
+      name: 'shipping',
+      component: Shipping
+    },
+    {
+
+      path:'/register',
+      name:'register',
+      component: Register
+
+      path: '/status',
+      name: 'status',
+      component: Status
+
     }
   ]
 })

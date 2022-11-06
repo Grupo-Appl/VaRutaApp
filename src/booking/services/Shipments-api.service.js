@@ -5,6 +5,10 @@ export class ShipmentsApiService {
         return http.get('/Shipments');
     }
 
+    getAllSender() {
+        return http.get('/senders');
+    }
+
     getById(id) {
         return http.get(`/Shipments/${id}`);
     }
