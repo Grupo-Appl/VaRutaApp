@@ -6,15 +6,20 @@ const Senders =() => import('../profiles/components/senders-information-section.
 const Consignees =() => import('../profiles/components/consignees-information-section.component.vue')
 const Documents =() => import('../handling/components/document-information-section.component.vue')
 const Shipping =() => import('../booking/components/shipping-information-section.component.vue')
+
+const LogIn =() => import('../security/component/user-consignee.component.vue')
+const Register=() => import('../security/component/user-consignee-register.component.vue')
+
+
 const Status =() => import('../tracking/components/status-information-section.component.vue')
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
-      path: '/home',
-      name: 'home',
-      component: HomeComponent
+      path: '/',
+      name: '',
+      component: LogIn
     },
     {
       path: '/destinations',
@@ -42,9 +47,15 @@ const router = createRouter({
       component: Shipping
     },
     {
+
+      path:'/register',
+      name:'register',
+      component: Register
+
       path: '/status',
       name: 'status',
       component: Status
+
     }
   ]
 })
