@@ -1,9 +1,23 @@
 {
+  "Packages": [
+    {
+      "id": 1,
+      "name": "caja"
+    },
+    {
+      "id": 2,
+      "name": "bulto"
+    },
+    {
+      "id": 3,
+      "name": "fardo"
+    }
+  ],
   "senders": [
     {
       "id": 2,
-      "name": "Maria",
-      "dni": "10203040",
+      "name": "Maria ramos",
+      "dni": "40414243",
       "phone": "998899988"
     },
     {
@@ -85,30 +99,14 @@
   "Shipments": [
     {
       "id": 1,
-      "date": "12/04/2022",
-      "destiny": "Trujillo",
-      "weight": "4.8",
-      "quantity": 1,
-      "freight": 15,
-      "description": "Descripcion del envio"
-    },
-    {
-      "id": 2,
-      "date": "12/04/2022",
-      "destiny": "Chiclayo",
-      "weight": "4.8",
-      "quantity": 1,
-      "freight": 15,
-      "description": "Descripcion del envio 2"
-    },
-    {
-      "id": 3,
-      "date": "12/04/2022",
-      "destiny": "piura",
-      "description": "descripcion",
-      "freight": "750",
-      "quantity": "2",
-      "weight": "3.8"
+      "description": "des",
+      "freight": "4",
+      "quantity": "3",
+      "weight": "2",
+      "date": "2022-10-20T05:00:00.000Z",
+      "destinyId": 6,
+      "senderId": 4,
+      "consigneeId": 2
     }
   ]
 }

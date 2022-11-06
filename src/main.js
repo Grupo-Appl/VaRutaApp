@@ -31,9 +31,12 @@ import Toast from "primevue/toast";
 import Dropdown from "primevue/dropdown";
 import Tag from "primevue/tag";
 import Card from "primevue/card";
+
 import Password from "primevue/password";
 import Axios from "axios";
 import Steps from 'primevue/steps';
+import Calendar from 'primevue/calendar';
+
 
 createApp(App)
     .use(createPinia())
@@ -58,4 +61,5 @@ createApp(App)
     .component('pv-card', Card)
     .component('pv-password', Password)
     .component('pv-steps', Steps)
+    .component('pv-calendar', Calendar)
     .mount('#app')

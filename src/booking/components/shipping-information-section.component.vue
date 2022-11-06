@@ -45,6 +45,7 @@
         <pv-column field="weight" header="weight" :sortable="true" style="min-width: 5rem"></pv-column>
         <pv-column field="quantity" header="Quantity" :sortable="true" style="min-width: 5rem"></pv-column>
         <pv-column field="freight" header="Freight" :sortable="true" style="min-width: 5rem"></pv-column>
+        <pv-column field="senderId" header="Sender" :sortable="true" style="min-width: 5rem"></pv-column>
 
         <pv-column :exportable="false" style="min-width: 8rem">
           <template #body="slotProps">
@@ -65,8 +66,46 @@
           :modal="true"
           class="p-fluid">
 
+         <span class="p-float-label">
+            <pv-calendar inputId="basic" v-model="shipping.date" autocomplete="off" dateFormat="dd-mm-yy"/>
+            <label for="freight">Date</label>
+            <small class="p-error" v-if="submitted && !shipping.date">
+              Date is required
+            </small>
+          </span>
 
         <div class="field mt-3">
+          <label for="freight">Destination</label>
+          <pv-dropdown v-model="selectedDestination"
+                       :options="destinations"
+                       optionLabel="name"
+                       optionValue="id"
+                       placeholder="Select a destination" />
+          <small class="p-error" v-if="submitted && !shipping.destinyId ">
+            Destination is required
+          </small>
+          <br>
+          <label for="freight">Sender</label>
+          <pv-dropdown v-model="selectedSender"
+                       :options="senders"
+                       optionLabel="name"
+                       optionValue="id"
+                       placeholder="Select a sender" />
+          <small class="p-error" v-if="submitted && !shipping.senderId">
+            Sender is required
+          </small>
+
+          <br>
+          <label for="freight">Consignee</label>
+          <pv-dropdown v-model="selectedConsignee"
+                       :options="consignees"
+                       optionLabel="name"
+                       optionValue="id"
+                       placeholder="Select a consignee" />
+          <small class="p-error" v-if="submitted && !shipping.consigneeId ">
+            Consignee is required
+          </small>
+<br>
           <span class="p-float-label">
             <pv-input-text type="text"
                            v-model.trim="shipping.description"
@@ -78,6 +117,7 @@
               Description is required
             </small>
           </span>
+
           <br>
           <span class="p-float-label">
             <pv-input-text type="text"
@@ -90,6 +130,7 @@
               Weight is required
             </small>
           </span>
+
           <br>
           <span class="p-float-label">
             <pv-input-text type="text"
@@ -102,6 +143,7 @@
               Quantity is required
             </small>
           </span>
+
           <br>
           <span class="p-float-label">
             <pv-input-text type="text"
@@ -114,9 +156,8 @@
               Freight is required
             </small>
           </span>
+
         </div>
-
-
 
         <template #footer>
           <pv-button :label="'Cancel'.toUpperCase()" icon="pi pi-times" class="p-button-text" @click="hideDialog"/>
@@ -179,6 +220,10 @@
 import {FilterMatchMode} from "primevue/api";
 import {ShipmentsApiService} from "@/booking/services/shipments-api.service";
 
+import {SendersApiService} from "../../profiles/services/Senders-api.service";
+import {ConsigneesApiService} from "../../profiles/services/consignees-api.service";
+import {DestinationsApiService} from "../../handling/services/Destinations-api.service";
+
 export default {
   description: "shipping-list.component",
   data() {
@@ -191,10 +236,41 @@ export default {
       selectedShipments: null,
       filters: {},
       submitted: false,
-      shipmentsService: null
+      shipmentsService: null,
+
+      sendersService: null,
+      selectedSender:null,
+      senders: [],
+
+      consigneeService: null,
+      selectedConsignee:null,
+      consignees: [],
+
+      destinationService: null,
+      selectedDestination:null,
+      destinations: []
     };
   },
   created() {
+
+    this.destinationService = new DestinationsApiService();
+    this.destinationService.getAll().then((response) => {
+      this.destinations = response.data;
+      console.log(this.senders);
+    });
+
+    this.sendersService = new SendersApiService();
+    this.sendersService.getAll().then((response) => {
+      this.senders = response.data;
+      console.log(this.senders);
+    });
+
+    this.consigneeService = new ConsigneesApiService();
+    this.consigneeService.getAll().then((response) => {
+      this.consignees = response.data;
+      console.log(this.consignees);
+    });
+
     this.shipmentsService = new ShipmentsApiService();
     this.shipmentsService.getAll().then((response) => {
       this.shipments = response.data;
@@ -219,7 +295,9 @@ export default {
         quantity: displayableShipping.quantity,
         weight: displayableShipping.weight,
         date: displayableShipping.date,
-        destiny: displayableShipping.destiny
+        destinyId: displayableShipping.destinyId,
+        senderId: displayableShipping.senderId,
+        consigneeId: displayableShipping.consigneeId
       };
     },
 
@@ -243,6 +321,10 @@ export default {
       this.submitted = true;
       if (this.shipping.description.trim()) {
         if (this.shipping.id) {
+          this.shipping.senderId = this.selectedSender;
+          this.shipping.consigneeId = this.selectedConsignee;
+          this.shipping.destinyId = this.selectedDestination;
+
           console.log(this.shipping);
           this.shipping = this.getStorableShipping(this.shipping);
           this.shipmentsService.update(this.shipping.id, this.shipping)
@@ -255,6 +337,10 @@ export default {
               });
         } else {
           this.shipping.id = 0;
+          this.shipping.senderId = this.selectedSender;
+          this.shipping.consigneeId = this.selectedConsignee;
+          this.shipping.destinyId = this.selectedDestination;
+
           console.log(this.shipping);
           this.shipping = this.getStorableShipping(this.shipping);
           this.shipmentsService.create(this.shipping).then((response) => {
