@@ -11,7 +11,7 @@ const Shipping =() => import('../booking/components/shipping-information-section
 const LogIn =() => import('../security/component/user-consignee.component.vue')
 const Register=() => import('../security/component/user-consignee-register.component.vue')
 
-
+const Status =() => import('../tracking/components/status-information-section.component.vue')
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -56,6 +56,13 @@ const router = createRouter({
       path:'/register',
       name:'register',
       component: Register
+    },
+    {
+
+      path: '/status',
+      name: 'status',
+      component: Status
+
     }
   ]
 })
